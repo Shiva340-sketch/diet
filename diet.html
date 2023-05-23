@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nutrition App</title>
+  <style>
+    /* CSS styles for the app */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    .food-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .food-item h3 {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nutrition App</h1>
+  
+  <input type="text" id="search-input" placeholder="Search food...">
+  <button onclick="searchFood()">Search</button>
+  
+  <div id="results-container"></div>
+  
+  <script>
+    // Function to search for a food item
+    function searchFood() {
+      const query = document.getElementById("search-input").value.toLowerCase();
+
+      // Sample food items with their nutrition information
+      const foodItems = [
+        { name: "Apple", calories: 52, protein: 0.3, carbs: 14, fat: 0.2 },
+        { name: "Banana", calories: 96, protein: 1.2, carbs: 23, fat: 0.2 },
+        { name: "Chicken Breast", calories: 165, protein: 31, carbs: 0, fat: 3.6 },
+        // Add more food items here...
+      ];
+
+      const resultsContainer = document.getElementById("results-container");
+      resultsContainer.innerHTML = "";
+
+      const filteredItems = foodItems.filter(food => food.name.toLowerCase().includes(query));
+
+      if (filteredItems.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+      } else {
+        filteredItems.forEach(food => {
+          const foodItem = document.createElement("div");
+          foodItem.classList.add("food-item");
+          foodItem.innerHTML = `
+            <h3>${food.name}</h3>
+            <p>Calories: ${food.calories}</p>
+            <p>Protein: ${food.protein}</p>
+            <p>Carbs: ${food.carbs}</p>
+            <p>Fat: ${food.fat}</p>
+          `;
+          resultsContainer.appendChild(foodItem);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
